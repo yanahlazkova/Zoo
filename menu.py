@@ -59,4 +59,4 @@ class SubMenu(Menu):
     def display_menu_items(self):
         for index, menu in enumerate(self.menu_list):
             print(" " * 47, index + 1, menu)
-        print(" " * 47, len(self.__menu_list) + 1, 'EXIT')
+        print(" " * 47, len(self.menu_list) + 1, 'EXIT')

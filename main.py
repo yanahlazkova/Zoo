@@ -5,11 +5,11 @@ from zookeeper import Zookeeper
 from zoo import Zoo
 
 item_menu_animal = [
-    'name',
-    'species',
-    'age'
+    'Add animal to enclosure',
+    'Delete animal without enclosure',
+    'List animals'
 ]
-menu_animal = Menu('MENU ANIMAL', item_menu_animal)
+menu_animal = SubMenu('MENU ANIMAL', item_menu_animal)
 
 item_menu_enclosure = [
     'enclosure_id',
@@ -35,19 +35,40 @@ list_main_menu = [
     {'menu_title': 'Enclosure', 'menu': menu_enclosure},
     {'menu_title': 'Zookeeper', 'menu': menu_zookeeper},
 ]
-if __name__ == '__main__':
-    main_menu = Menu('MAIN MENU:', list_main_menu)
-    main_menu.display_menu()
-    # choice_item_menu = main_menu.get_user_choice()
-    # print(f'Your choice: {choice_item_menu}')
+
+menu = Menu('MAIN MENU:', list_main_menu)
+
+def main_menu():
     while True:
-        choice_item_menu = main_menu.get_user_choice()
+        menu.display_menu()
+        choice_item_menu = menu.get_user_choice()
         match choice_item_menu:
             case 1:
                 print(data_zoo)
                 input('Press any key to continue')
+            case 2:
+                go_to_menu_animal()
+                # menu_animal.display_menu_items()
+                # input('Press any key to continue')
+
             case 5:
                 exit()
+
+def go_to_menu_animal():
+    while True:
+        menu_animal.display_menu()
+        choice_menu = menu_animal.get_user_choice()
+        match choice_menu:
+            case 1:
+                print('Add new animal')
+            case 4:
+                break
+
+if __name__ == '__main__':
+    main_menu()
+    # choice_item_menu = main_menu.get_user_choice()
+    # print(f'Your choice: {choice_item_menu}')
+
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

@@ -1,3 +1,4 @@
+from animal import Animal
 class Zoo:
     __animals = [] # список тварин
     __administrations = [] # список співробітників адміністрації
@@ -21,3 +22,11 @@ class Zoo:
             if self.__zookeeper:
                 str_zoo_data += f'Animals:\n{list(self.__zookeeper)}'
         return f'Animals:\n{list(self.__animals)}'
+
+    def add_animal(self):
+        new_name = input("Enter name the animal: ")
+        new_species = input("Enter species the animal: ")
+        new_age = input("Enter age the animal: ")
+        new_animal = Animal(new_name, new_species, new_age)
+        self.__animals.append(new_animal)
+        # self.__enclosures
