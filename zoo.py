@@ -49,7 +49,8 @@ class Zoo:
         new_species = input("Enter species the animal: ")
         new_age = input("Enter age the animal: ")
         new_animal = Animal(new_name, new_species, new_age)
-        self.__animals.append(new_animal)
+        # self.__animals.append(new_animal)
+        self.__animals = [new_animal]
         print(self.__animals)
         return new_animal
 
@@ -81,10 +82,9 @@ class Zoo:
         print(list(self.__animals))
         return self.__animals
 
-    #
-    # @animals.setter
-    # def animals(self, animal):
-    #     self.__animals.append(animal)
+    @animals.setter
+    def animals(self, animal):
+        self.__animals.append(animal)
 
     @property
     def enclosures(self):
