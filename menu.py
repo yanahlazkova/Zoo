@@ -1,32 +1,55 @@
 # Класс створення меню
 class Menu:
-    exit_item = 0
-    def __init__(self, menu_title, menu_list: list):
-        self.__menu_title = menu_title
-        self.__menu_list = menu_list
-        self.exit_item = len(menu_list) + 1
+    __exit_item = 0
+    __menu_list = []
+    __title = ''
+    # def __init__(self, menu_title, menu_list: list):
+    #     self.__menu_title = menu_title
+    #     self.__menu_list = menu_list
+    #     self.exit_item = len(menu_list) + 1
 
-    # функція виводу Меню
-    def display_menu(self):
+    @staticmethod
+    def display_menu(title: str, menu_list):
+        Menu.__menu_list = menu_list
+        Menu.__title = title
+        # функція виводу Меню
         # Виводить загловок меню
         print()
         border = "*" * 40
         print(border.rjust(80, " "))
 
         print('*'.rjust(41, ' '), end="")
-        print(self.__menu_title.center(37, ' '), '*')
+        print(title.center(37, ' '), '*')
 
         print(border.rjust(80, " "))
         print()
-        self.display_menu_items()
+        Menu.__display_menu_items()
+        # cls.display_menu_items(cls.__menu_list)
 
-    def display_menu_items(self):
+    @classmethod
+    def __display_menu_items(cls):
         # Виводить пункти меню
-        for index, menu in enumerate(self.__menu_list):
-            print(" " * 47, index + 1, menu['menu_title'])
-        print(" " * 47, len(self.__menu_list) + 1, 'EXIT')
+        for index, menu in enumerate(cls.__menu_list):
+            print(" " * 47, index + 1, menu)
+        print(" " * 47, len(cls.__menu_list) + 1, 'EXIT')
 
-    def get_user_choice(self):
+    @staticmethod
+    def display_list(title, new_list):
+        # Виводить список
+        print()
+        border = "*" * 40
+        print(border.rjust(80, " "))
+
+        print('*'.rjust(41, ' '), end="")
+        print(title.center(37, ' '), '*')
+
+        print(border.rjust(80, " "))
+        print()
+        for index, menu in enumerate(new_list):
+            print(" " * 47, index + 1, menu)
+
+    @staticmethod
+    def get_user_choice(count_items):
         # Повертає номер пункту, який обрав користувач
         while True:
             try:
@@ -34,29 +57,28 @@ class Menu:
                 choice = input(f'\n{" " * 40}Select menu item:\t')
                 choice = int(choice)
                 # Перевіряємо, що число знаходиться в допустимому діапазоні
-                if 1 <= choice <= len(self.__menu_list) + 1:
+                if 1 <= choice <= count_items:
                     return choice
                 else:
-                    print(f"Please enter a number between 1 and {len(self.__menu_list) + 1}.")
+                    print(f"Please enter a number between 1 and {count_items}.")
 
             except ValueError:
                 print("Invalid input. Please enter a number.")
 
-    @property
-    def menu_list(self):
-        return self.__menu_list
-
-    @property
-    def menu_title(self):
-        return self.__menu_title
+    # @property
+    # def menu_list():
+    #     return cls.__menu_list
+    #
+    # @property
+    # def menu_title(:
+    #     return self.__menu_title
 
 
 class SubMenu(Menu):
-    def __init__(self, menu_title, menu_list: list):
-        super().__init__(menu_title, menu_list)
-        # self.__menu_title = menu_title
+    # def __init__(self, menu_title, menu_list: list):
+    #     super().__init__(menu_title, menu_list)
 
-    def display_menu_items(self):
-        for index, menu in enumerate(self.menu_list):
+    def __display_menu_items(Menu):
+        for index, menu in enumerate(Menu.__menu_list):
             print(" " * 47, index + 1, menu)
-        print(" " * 47, len(self.menu_list) + 1, 'EXIT')
+        print(" " * 47, len(menu_list) + 1, 'EXIT')

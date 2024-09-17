@@ -9,7 +9,7 @@ item_menu_animal = [
     'Delete animal without enclosure',
     'List animals'
 ]
-menu_animal = SubMenu('MENU ANIMAL', item_menu_animal)
+# menu_animal = SubMenu('MENU ANIMAL', item_menu_animal)
 
 item_menu_enclosure = [
     'enclosure_id',
@@ -17,7 +17,7 @@ item_menu_enclosure = [
     'animals'
 ]
 
-menu_enclosure = Menu('MENU ENCLOSURE', item_menu_enclosure)
+# menu_enclosure = Menu('MENU ENCLOSURE', item_menu_enclosure)
 
 item_menu_zookeeper = [
     'name',
@@ -25,23 +25,25 @@ item_menu_zookeeper = [
     'assigned_enclosures'
 ]
 
-menu_zookeeper = Menu('MENU ENCLOSURE', item_menu_zookeeper)
+# menu_zookeeper = Menu('MENU ENCLOSURE', item_menu_zookeeper)
 
 data_zoo = Zoo()
 
 list_main_menu = [
-    {'menu_title': 'Data zoo', 'menu': data_zoo},
-    {'menu_title': 'Animal', 'menu': menu_animal},
-    {'menu_title': 'Enclosure', 'menu': menu_enclosure},
-    {'menu_title': 'Zookeeper', 'menu': menu_zookeeper},
+    'Data zoo',
+    'Animal', #, 'menu': menu_animal},
+    'Enclosure', #, 'menu': menu_enclosure},
+    'Zookeeper', #, 'menu': menu_zookeeper},
 ]
 
-menu = Menu('MAIN MENU:', list_main_menu)
+# main_menu = Menu('MAIN MENU:', list_main_menu)
 
-def main_menu():
+def start_menu():
+    # global list_main_menu
     while True:
-        menu.display_menu()
-        choice_item_menu = menu.get_user_choice()
+        # main_menu.display_menu()
+        Menu.display_menu('MAIN MENU', list_main_menu)
+        choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
         match choice_item_menu:
             case 1:
                 print(data_zoo)
@@ -56,16 +58,18 @@ def main_menu():
 
 def go_to_menu_animal():
     while True:
-        menu_animal.display_menu()
-        choice_menu = menu_animal.get_user_choice()
+        Menu.display_menu('MENU ANIMALS:', item_menu_animal)
+        choice_menu = Menu.get_user_choice(len(item_menu_animal) + 1)
         match choice_menu:
             case 1:
                 print('Add new animal')
+                data_zoo.add_animal()
             case 4:
                 break
 
+
 if __name__ == '__main__':
-    main_menu()
+    start_menu()
     # choice_item_menu = main_menu.get_user_choice()
     # print(f'Your choice: {choice_item_menu}')
 
