@@ -31,9 +31,9 @@ data_zoo = Zoo()
 
 list_main_menu = [
     'Data zoo',
-    'Animal', #, 'menu': menu_animal},
-    'Enclosure', #, 'menu': menu_enclosure},
-    'Zookeeper', #, 'menu': menu_zookeeper},
+    'Animal',
+    'Enclosure',
+    'Zookeeper',
 ]
 
 # main_menu = Menu('MAIN MENU:', list_main_menu)
@@ -56,6 +56,7 @@ def start_menu():
             case 5:
                 exit()
 
+
 def go_to_menu_animal():
     while True:
         Menu.display_menu('MENU ANIMALS:', item_menu_animal)
@@ -64,14 +65,17 @@ def go_to_menu_animal():
             case 1:
                 print('Add new animal')
                 data_zoo.add_animal()
+            case 2:
+                pass
+            case 3:
+                print(data_zoo.animals)
             case 4:
                 break
 
 
 if __name__ == '__main__':
     start_menu()
-    # choice_item_menu = main_menu.get_user_choice()
-    # print(f'Your choice: {choice_item_menu}')
+
 
 
 

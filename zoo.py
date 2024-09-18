@@ -23,6 +23,13 @@ class Zoo:
                 str_zoo_data += f'\nEnclosures:\n'
                 for enclosure in self.__enclosures:
                     str_zoo_data += f' - {enclosure}\n'
+                    if enclosure.animals:
+                        str_zoo_data += Zoo.__animals
+                        # str_zoo_data += '\t\tList animals in enclosure:\n'
+                        # for index, animal in enumerate(enclosure.animals):
+                        #     str_zoo_data += f'\t{index + 1}. {animal}\n'
+                    else:
+                        str_zoo_data += '\t\tЩе намає тварин'
             else:
                     str_zoo_data += '\nEnclosure: No data\n'
             if self.__administrations:
@@ -49,9 +56,7 @@ class Zoo:
         new_species = input("Enter species the animal: ")
         new_age = input("Enter age the animal: ")
         new_animal = Animal(new_name, new_species, new_age)
-        # self.__animals.append(new_animal)
-        self.__animals = [new_animal]
-        print(self.__animals)
+        self.__animals.append(new_animal)
         return new_animal
 
     def place_to_enclosure(self, animal):
@@ -60,27 +65,31 @@ class Zoo:
             print('\nВол\'єри ще не заведені!!!\n')
             self.create_enclosure()
 
-        enclosure = self.select_enclosure()
-        enclosure = animal
-        print('Place to enclosure')
-        print(animal)
+        enclosure = self.choose_enclosure()
+        enclosure.animals = animal
+        print(f'{animal} place to enclosure "{enclosure}"')
 
     def create_enclosure(self):
         enclosure_id = len(self.__enclosures) + 1
         size = input("Enter a size of the enclosures: ")
         enclosure = Enclosure(enclosure_id, size)
+        print(f'\nAdded new enclosure\n\tid: {enclosure.enclosure_id}, size: {size}')
         self.__enclosures.append(enclosure)
+        input('\nPress any key to continue ')
 
-    def select_enclosure(self):
+    def choose_enclosure(self):
         Menu.display_list('LIST ENCLOSURES: ', self.__enclosures)
-        choice = Menu.get_user_choice(len(self.__enclosures) + 1)
-        if 1 <= choice <= len(self.__enclosures):
-            return self.__enclosures[choice - 1]
+        choice = Menu.get_user_choice(len(self.__enclosures))
+        # if 1 <= choice <= len(self.__enclosures):
+        return self.__enclosures[choice - 1]
 
     @property
     def animals(self):
-        print(list(self.__animals))
-        return self.__animals
+        list_animals = ''
+        list_animals += '\t\tList animals:\n'
+        for index, animal in enumerate(self.__animals):
+            list_animals += f'\t{index + 1}. {animal}\n'
+        return list_animals
 
     @animals.setter
     def animals(self, animal):

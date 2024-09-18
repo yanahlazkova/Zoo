@@ -13,13 +13,18 @@ class Enclosure:
     def animals(self, new_animal):
         self.__animals.append(new_animal)
 
+    @property
+    def enclosure_id(self):
+        return self.__enclosure_id
+
     def __str__(self):
-        str_list_animals = '\nList animals:\n'
-        if self.__animals:
-            for animal in self.__animals:
-                str_list_animals += f'\t- {animal}\n'
-            else:
-                str_list_animals += 'No data\n'
-        else:
-            str_list_animals += 'No data\n'
-        return f"Вол'єр id-{self.__enclosure_id} size-{self.__size}\n{str_list_animals}"
+        # str_list_animals = '\nList animals:\n'
+        # if self.__animals:
+        #     for animal in self.__animals:
+        #         str_list_animals += f'\t- {animal}\n'
+        #     else:
+        #         str_list_animals += 'No data\n'
+        # else:
+        #     str_list_animals += 'No data\n'
+        # return f"Вол'єр id-{self.__enclosure_id} size-{self.__size}\n{str_list_animals}"
+        return f"Вол'єр id-{self.__enclosure_id} size-{self.__size}"
