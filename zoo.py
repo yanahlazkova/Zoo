@@ -24,9 +24,10 @@ class Zoo:
                 for enclosure in self.__enclosures:
                     str_zoo_data += f' - {enclosure}\n'
                     if enclosure.animals:
-                        str_zoo_data += '\t\tList animals in enclosure:\n'
-                        for index, animal in enumerate(enclosure.animals):
-                            str_zoo_data += f'\t{index + 1}. {animal}\n'
+                        str_zoo_data += Zoo.__animals
+                        # str_zoo_data += '\t\tList animals in enclosure:\n'
+                        # for index, animal in enumerate(enclosure.animals):
+                        #     str_zoo_data += f'\t{index + 1}. {animal}\n'
                     else:
                         str_zoo_data += '\t\tЩе намає тварин'
             else:
@@ -84,8 +85,11 @@ class Zoo:
 
     @property
     def animals(self):
-        print(list(self.__animals))
-        return self.__animals
+        list_animals = ''
+        list_animals += '\t\tList animals:\n'
+        for index, animal in enumerate(self.__animals):
+            list_animals += f'\t{index + 1}. {animal}\n'
+        return list_animals
 
     @animals.setter
     def animals(self, animal):

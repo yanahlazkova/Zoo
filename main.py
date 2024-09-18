@@ -65,6 +65,10 @@ def go_to_menu_animal():
             case 1:
                 print('Add new animal')
                 data_zoo.add_animal()
+            case 2:
+                pass
+            case 3:
+                print(data_zoo.animals)
             case 4:
                 break
 
