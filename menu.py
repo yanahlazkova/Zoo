@@ -37,16 +37,16 @@ class Menu:
     def display_list(title, new_list):
         # Виводить список
         print()
-        border = "*" * 40
-        print(border.rjust(80, " "))
+        # border = "*" * 40
+        # print(border.rjust(80, " "))
 
-        print('*'.rjust(41, ' '), end="")
-        print(title.center(37, ' '), '*')
+        print('***'.rjust(41, ' '), end="")
+        print(title.center(27, ' '), '***')
 
-        print(border.rjust(80, " "))
+        # print(border.rjust(80, " "))
         print()
         for index, menu in enumerate(new_list):
-            print(" " * 47, index + 1, menu)
+            print(f'{" " * 39}{index + 1}. {menu}')
 
     @staticmethod
     def get_user_choice(count_items):
