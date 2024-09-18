@@ -1,5 +1,7 @@
 from animal import Animal
 from enclosure import Enclosure
+from zookeeper import Zookeeper, Administration
+from person import Person
 from menu import Menu
 class Zoo:
     __animals = [] # список тварин
@@ -9,11 +11,6 @@ class Zoo:
 
     @property
     def animals(self):
-        # list_animals = ''
-        # list_animals += '\t\tList animals:\n'
-        # for index, animal in enumerate(self.__animals):
-        #     list_animals += f'\t{index + 1}. {animal[0]} - {animal[1]}\n'
-        # return list_animals
         return (animal for animal in self.__animals)
 
     @animals.setter
@@ -27,6 +24,14 @@ class Zoo:
     @enclosures.setter
     def enclosures(self, enclosure):
         self.__enclosures.append(enclosure)
+
+    @property
+    def administrations(self):
+        return (admin for admin in self.__administrations)
+
+    @administrations.setter
+    def administrations(self, new_admin):
+        self.__administrations.append(new_admin)
 
     def __str__(self):
         list_zoo_data = [self.__animals, self.__enclosures, self.__zookeeper, self.__administrations]
@@ -136,3 +141,17 @@ class Zoo:
             Menu.display_list("LIST ENCLOSURE:", list_enclosures)
         else:
             print('List enclosures: No data\n')
+
+
+    # ************** Методи для меню PERSONS
+
+    def add_administrator(self):
+        new_administrator = Administration()
+        self.administrations = new_administrator
+
+    def list_administrations(self):
+        Menu.display_list('List administrations', self.administrations)
+
+    def list_persons(self):
+        print(Person.list_persons)
+

@@ -94,6 +94,20 @@ def go_to_menu_persons():
     while True:
         Menu.display_menu('MENU PERSONS', item_menu_persons)
         choice_menu = Menu.get_user_choice(len(item_menu_persons) + 1)
+        match choice_menu:
+            case 1:
+                data_zoo.add_administrator()
+            case 2:
+                data_zoo.list_administrations()
+                input('Press eny key to continue ')
+            case 4:
+                pass
+            case 5:
+                data_zoo.list_persons()
+                input('Press eny key to continue ')
+            case 6:
+                break
+
 
 
 if __name__ == '__main__':
