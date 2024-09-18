@@ -17,48 +17,47 @@ item_menu_enclosure = [
     'List enclosure'
 ]
 
-# menu_enclosure = Menu('MENU ENCLOSURE', item_menu_enclosure)
-
-item_menu_zookeeper = [
-    'name',
-    'employee_id',
-    'assigned_enclosures'
+item_menu_persons = [
+    'Add administrator',
+    'List administrations',
+    'Add zookeeper',
+    'List zookeepers',
+    'List persons'
 ]
-
-# menu_zookeeper = Menu('MENU ENCLOSURE', item_menu_zookeeper)
 
 data_zoo = Zoo()
 
 list_main_menu = [
     'Data zoo',
-    'Animal',
-    'Enclosure',
-    'Zookeeper',
+    'Animals',
+    'Enclosures',
+    'Persons',
 ]
 
 # main_menu = Menu('MAIN MENU:', list_main_menu)
 
+
 def start_menu():
     # global list_main_menu
     while True:
-        # main_menu.display_menu()
         Menu.display_menu('MAIN MENU', list_main_menu)
         choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
         match choice_item_menu:
             case 1:
-                # print(data_zoo)
                 data_zoo.list_animals()
                 data_zoo.list_enclosures()
                 input('Press any key to continue')
             case 2:
-                go_to_menu_animal()
+                go_to_menu_animals()
             case 3:
-                go_to_menu_enclosure()
+                go_to_menu_enclosures()
+            case 4:
+                go_to_menu_persons()
             case 5:
                 exit()
 
 
-def go_to_menu_animal():
+def go_to_menu_animals():
     while True:
         Menu.display_menu('MENU ANIMALS:', item_menu_animal)
         choice_menu = Menu.get_user_choice(len(item_menu_animal) + 1)
@@ -75,9 +74,10 @@ def go_to_menu_animal():
             case 4:
                 break
 
-def go_to_menu_enclosure():
+
+def go_to_menu_enclosures():
     while True:
-        Menu.display_menu('MENU ENCLOSURE:', item_menu_enclosure)
+        Menu.display_menu('MENU ENCLOSURES:', item_menu_enclosure)
         choice_menu = Menu.get_user_choice(len(item_menu_enclosure) + 1)
         match choice_menu:
             case 1:
@@ -88,6 +88,12 @@ def go_to_menu_enclosure():
 
             case 4:
                 break
+
+
+def go_to_menu_persons():
+    while True:
+        Menu.display_menu('MENU PERSONS', item_menu_persons)
+        choice_menu = Menu.get_user_choice(len(item_menu_persons) + 1)
 
 
 if __name__ == '__main__':

@@ -3,10 +3,6 @@ class Menu:
     __exit_item = 0
     __menu_list = []
     __title = ''
-    # def __init__(self, menu_title, menu_list: list):
-    #     self.__menu_title = menu_title
-    #     self.__menu_list = menu_list
-    #     self.exit_item = len(menu_list) + 1
 
     @staticmethod
     def display_menu(title: str, menu_list):
@@ -24,7 +20,6 @@ class Menu:
         print(border.rjust(80, " "))
         print()
         Menu.__display_menu_items()
-        # cls.display_menu_items(cls.__menu_list)
 
     @classmethod
     def __display_menu_items(cls):
@@ -65,20 +60,3 @@ class Menu:
             except ValueError:
                 print("Invalid input. Please enter a number.")
 
-    # @property
-    # def menu_list():
-    #     return cls.__menu_list
-    #
-    # @property
-    # def menu_title(:
-    #     return self.__menu_title
-
-
-class SubMenu(Menu):
-    # def __init__(self, menu_title, menu_list: list):
-    #     super().__init__(menu_title, menu_list)
-
-    def __display_menu_items(Menu):
-        for index, menu in enumerate(Menu.__menu_list):
-            print(" " * 47, index + 1, menu)
-        print(" " * 47, len(menu_list) + 1, 'EXIT')
