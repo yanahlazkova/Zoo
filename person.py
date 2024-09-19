@@ -1,6 +1,5 @@
 class Person:
     __list_persons = []
-    # __employee_id = 'pr00-'
     def __init__(self, name, employee_id):
         self.__name= name
         self.__employee_id = employee_id + str(f'-{len(self.__list_persons) + 1}')
@@ -19,17 +18,12 @@ class Person:
 
     @property
     def list_persons(self):
-    #     print(type(self.__list_persons))
-    #     if self.__list_persons:
-    #         return self.__list_persons
-    #     else:
-    #         return 'The list of persons is empty'
-        return (person for person in self.__list_persons)
-
-    @list_persons.setter
-    def list_persons(self, person):
-        self.__list_persons.append(person)
+        return self.__list_persons
 
     @classmethod
     def add_person_to_list(cls, person):
         cls.__list_persons.append(person)
+
+    @classmethod
+    def get_list_persons(cls):
+        return cls.__list_persons

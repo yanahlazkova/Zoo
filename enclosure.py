@@ -7,7 +7,7 @@ class Enclosure:
 
     @property
     def animals(self):
-        return (animal for animal in self.__animals)
+        return self.__animals
 
     @animals.setter
     def animals(self, new_animal):

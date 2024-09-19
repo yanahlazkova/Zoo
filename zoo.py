@@ -9,9 +9,19 @@ class Zoo:
     __administrations = [] # список співробітників адміністрації
     __zookeeper = [] # список персоналу, що опікуються тваринами
 
+    # @property
+    # def animals(self):
+    #     return self.__animals
     @property
     def animals(self):
-        return (animal for animal in self.__animals)
+        str_list_animals = f'\n\t***\tLIST ANIMALS:\t***\n\n'
+        if self.__animals:
+            for index, [animal, enclosure] in enumerate(self.__animals):
+                str_list_animals += f'\t{index + 1}. {animal}\t-\t{enclosure}\n'
+        else:
+            str_list_animals += f'\n\tNo data\n'
+
+        return str_list_animals
 
     @animals.setter
     def animals(self, animal):
@@ -19,7 +29,19 @@ class Zoo:
 
     @property
     def enclosures(self):
-        return (enclosure for enclosure in self.__enclosures)
+        str_list_enclosures = f'\n\t***\tLIST ENCLOSURES:\t***\n'
+        if self.__enclosures:
+            for index, enclosure in enumerate(self.__enclosures):
+                str_list_enclosures += f'\n\t{index + 1}. {enclosure}\n'
+                if enclosure.animals:
+                    for index_animal, animal in enumerate(enclosure.animals):
+                        str_list_enclosures += f'\t\t{index_animal + 1}. {animal}\n'
+                else:
+                    str_list_enclosures += '\t\tThe list of animals is empty\n'
+        else:
+            str_list_enclosures += f'\n\tNo data\n'
+
+        return str_list_enclosures
 
     @enclosures.setter
     def enclosures(self, enclosure):
@@ -27,7 +49,7 @@ class Zoo:
 
     @property
     def administrations(self):
-        return (admin for admin in self.__administrations)
+        return self.__administrations
 
     @administrations.setter
     def administrations(self, new_admin):
@@ -74,14 +96,14 @@ class Zoo:
 
         return f'Zoo:\n{str_zoo_data}'
 
-
 # ************** Методи для меню ANIMALS
 
     def add_animal(self):
         new_animal = self.create_animal()
         self.place_to_enclosure(new_animal)
 
-    def create_animal(self):
+    @staticmethod
+    def create_animal():
         new_name = input("Enter name the animal: ")
         new_species = input("Enter species the animal: ")
         new_age = input("Enter age the animal: ")
@@ -108,14 +130,16 @@ class Zoo:
         # if 1 <= choice <= len(self.__enclosures):
         return self.__enclosures[choice - 1]
 
-    def list_animals(self):
-        if self.__animals:
-            list_animals = []
-            for animal, enclosure in self.__animals:
-                list_animals.append(f'{animal}\t-\t{enclosure}')
-            Menu.display_list('The List of animals', list_animals)
-        else:
-            print('List animals: No data\n')
+    # def list_animals(self):
+    #     if self.__animals:
+    #         list_animals = []
+    #         for animal, enclosure in self.__animals:
+    #             list_animals.append(f'{animal}\t-\t{enclosure}')
+    #         Menu.display_list('The List of animals', list_animals)
+    #     else:
+    #         print('List animals: No data\n')
+
+
 
     # ************** Методи для меню ENCLOSURES
 
@@ -148,10 +172,10 @@ class Zoo:
     def add_administrator(self):
         new_administrator = Administration()
         self.administrations = new_administrator
+        Person.add_person_to_list(new_administrator)
 
     def list_administrations(self):
         Menu.display_list('List administrations', self.administrations)
 
     def list_persons(self):
         print(Person.list_persons)
-

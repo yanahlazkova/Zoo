@@ -44,8 +44,8 @@ def start_menu():
         choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
         match choice_item_menu:
             case 1:
-                data_zoo.list_animals()
-                data_zoo.list_enclosures()
+                print(data_zoo.animals)
+                print(data_zoo.enclosures)
                 input('Press any key to continue')
             case 2:
                 go_to_menu_animals()
@@ -68,7 +68,7 @@ def go_to_menu_animals():
             case 2:
                 pass
             case 3:
-                data_zoo.list_animals()
+                print(data_zoo.animals)
                 input('Press eny key to continue ')
 
             case 4:
@@ -83,7 +83,7 @@ def go_to_menu_enclosures():
             case 1:
                 data_zoo.create_enclosure()
             case 3:
-                data_zoo.list_enclosures()
+                print(data_zoo.enclosures)
                 input('Press eny key to continue ')
 
             case 4:
