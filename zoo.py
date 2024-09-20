@@ -1,13 +1,14 @@
 from animal import Animal
 from enclosure import Enclosure
-from zookeeper import Zookeeper, Administration
+from zookeeper import Zookeeper, Employee
 from person import Person
 from menu import Menu
+
 class Zoo:
     __animals = [] # список тварин
     __enclosures = [] # список вол'єрів
-    __administrations = [] # список співробітників адміністрації
-    __zookeeper = [] # список персоналу, що опікуються тваринами
+    __employees = [] # список співробітників
+    __zookeepers = [] # список персоналу, що відповідають за вол'єри
 
     # @property
     # def animals(self):
@@ -48,59 +49,31 @@ class Zoo:
         self.__enclosures.append(enclosure)
 
     @property
-    def administrations(self):
-        return self.__administrations
+    def employees(self):
+        return self.__employees
 
-    @administrations.setter
-    def administrations(self, new_admin):
-        self.__administrations.append(new_admin)
+    @employees.setter
+    def employees(self, new_admin):
+        self.__employees.append(new_admin)
+
+    @property
+    def zookeepers(self):
+        return self.__zookeepers
+
+    @zookeepers.setter
+    def zookeepers(self, employee):
+        self.__zookeepers.append(employee)
 
     def __str__(self):
-        list_zoo_data = [self.__animals, self.__enclosures, self.__zookeeper, self.__administrations]
+        list_zoo_data = [self.__animals, self.__enclosures, self.__zookeepers, self.__employees]
         if not any(list_zoo_data):
             return f'No data'
-        else:
-            str_zoo_data = ''
-            if self.__animals:
-                str_zoo_data += '\nAnimals:\n'
-                for index, animal in enumerate(self.animals):
-                    str_zoo_data += f' - {animal}\n'
-            else:
-                str_zoo_data += '\nAnimals: No data\n'
-
-            if self.__enclosures:
-                str_zoo_data += f'\nEnclosures:\n'
-                # for enclosure in self.__enclosures:
-                for index, enclosure in enumerate(self.enclosures):
-                    str_zoo_data += f' {index + 1}. {enclosure}\n'
-                    if enclosure.animals:
-                        # str_zoo_data += self.animals
-                        str_zoo_data += enclosure.animals
-
-                    else:
-                        str_zoo_data += '\t\tЩе намає тварин'
-            else:
-                    str_zoo_data += '\nEnclosure: No data\n'
-            if self.__administrations:
-                str_zoo_data += f'\nAdministrations:\n'
-                for administration in self.__administrations:
-                    str_zoo_data += f' - {administration}\n'
-            else:
-                    str_zoo_data += '\nAdministrations: No data\n'
-            if self.__administrations:
-                str_zoo_data += f'\nZookeeper:\n'
-                for zookeeper in self.__zookeeper:
-                    str_zoo_data += f' - {zookeeper}\n'
-            else:
-                    str_zoo_data += '\nZookeeper: No data\n'
-
-        return f'Zoo:\n{str_zoo_data}'
 
 # ************** Методи для меню ANIMALS
 
     def add_animal(self):
         new_animal = self.create_animal()
-        self.place_to_enclosure(new_animal)
+        self.place_animal_to_enclosure(new_animal)
 
     @staticmethod
     def create_animal():
@@ -111,7 +84,7 @@ class Zoo:
         # self.animals = new_animal
         return new_animal
 
-    def place_to_enclosure(self, animal):
+    def place_animal_to_enclosure(self, animal):
         # поміщає тварину до вол'єру
         if not self.__enclosures:
             print('\nВол\'єри ще не заведені!!!\n')
@@ -127,19 +100,7 @@ class Zoo:
     def choose_enclosure(self):
         Menu.display_list('LIST ENCLOSURES: ', self.__enclosures)
         choice = Menu.get_user_choice(len(self.__enclosures))
-        # if 1 <= choice <= len(self.__enclosures):
         return self.__enclosures[choice - 1]
-
-    # def list_animals(self):
-    #     if self.__animals:
-    #         list_animals = []
-    #         for animal, enclosure in self.__animals:
-    #             list_animals.append(f'{animal}\t-\t{enclosure}')
-    #         Menu.display_list('The List of animals', list_animals)
-    #     else:
-    #         print('List animals: No data\n')
-
-
 
     # ************** Методи для меню ENCLOSURES
 
@@ -166,16 +127,57 @@ class Zoo:
         else:
             print('List enclosures: No data\n')
 
-
     # ************** Методи для меню PERSONS
 
-    def add_administrator(self):
-        new_administrator = Administration()
-        self.administrations = new_administrator
-        Person.add_person_to_list(new_administrator)
+    def add_employee(self):
+        employee = Employee()
+        self.employees = employee
 
-    def list_administrations(self):
-        Menu.display_list('List administrations', self.administrations)
+    def list_employees(self):
+        Menu.display_list('List employees', self.employees)
 
-    def list_persons(self):
-        print(Person.list_persons)
+    # def list_persons(self):
+    #     print(Person.list_persons)
+    def add_enclosure_to_zookeeper(self):
+        choice_employee = None
+        choice_enclosure = None
+        if self.__employees:
+            Menu.display_list('List employees:', self.__employees)
+            choice = Menu.get_user_choice(len(self.__employees))
+            choice_employee = self.__employees[choice - 1]
+            print(f'Your choice: {choice_employee}')
+            input('Press any key ')
+        else:
+            print('The list of employees is empty')
+            input('Press any key ')
+            return
+        if self.__enclosures:
+
+            choice_enclosure = self.choose_enclosure()
+            print(f'Your choice: {choice_enclosure}')
+            input('Press any key ')
+        else:
+            print("The list of enclosures is empty")
+            input('Press any key ')
+            return
+        self.place_enclosure_to_employee(choice_employee, choice_enclosure)
+
+    def place_enclosure_to_employee(self, employee, enclosure):
+        # Перевірка, чи існує співробітник у списку __zookeepers
+        if self.__zookeepers:
+            for zookeeper, enclosures in self.__zookeepers:
+                if employee == zookeeper:
+                    print(f'Employee {employee} is in the list ')
+                    print(f'list enclosures: {enclosures}')
+                else:
+                    self.__zookeepers.append(employee)
+        else:
+            print('list is empty')
+
+
+        zookeeper = Zookeeper(employee, enclosure)
+
+    def list_zookeepers(self):
+        # if self.__zookeepers:
+            # for employee in self.__zookeepers:
+        Menu.display_list('List zookeeper:', self.__zookeepers)

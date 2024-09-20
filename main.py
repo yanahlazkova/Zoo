@@ -1,7 +1,7 @@
 from menu import *
 from animal import Animal
 from enclosure import Enclosure
-from zookeeper import Zookeeper
+from zookeeper import Zookeeper, Employee
 from zoo import Zoo
 
 item_menu_animal = [
@@ -17,12 +17,11 @@ item_menu_enclosure = [
     'List enclosure'
 ]
 
-item_menu_persons = [
-    'Add administrator',
-    'List administrations',
+item_menu_employees = [
+    'Add employee',
+    'List employees',
     'Add zookeeper',
     'List zookeepers',
-    'List persons'
 ]
 
 data_zoo = Zoo()
@@ -31,7 +30,7 @@ list_main_menu = [
     'Data zoo',
     'Animals',
     'Enclosures',
-    'Persons',
+    'Employees',
 ]
 
 # main_menu = Menu('MAIN MENU:', list_main_menu)
@@ -52,7 +51,7 @@ def start_menu():
             case 3:
                 go_to_menu_enclosures()
             case 4:
-                go_to_menu_persons()
+                go_to_menu_employee()
             case 5:
                 exit()
 
@@ -90,29 +89,29 @@ def go_to_menu_enclosures():
                 break
 
 
-def go_to_menu_persons():
+def go_to_menu_employee():
     while True:
-        Menu.display_menu('MENU PERSONS', item_menu_persons)
-        choice_menu = Menu.get_user_choice(len(item_menu_persons) + 1)
+        Menu.display_menu('MENU PERSONS', item_menu_employees)
+        choice_menu = Menu.get_user_choice(len(item_menu_employees) + 1)
         match choice_menu:
             case 1:
-                data_zoo.add_administrator()
+                data_zoo.add_employee()
             case 2:
-                data_zoo.list_administrations()
+                data_zoo.list_employees()
                 input('Press eny key to continue ')
+            case 3:
+                data_zoo.add_enclosure_to_zookeeper()
             case 4:
-                pass
-            case 5:
-                data_zoo.list_persons()
+                data_zoo.list_zookeepers()
                 input('Press eny key to continue ')
-            case 6:
+            case 5:
                 break
 
 
 
 if __name__ == '__main__':
-    start_menu()
 
+    start_menu()
 
 
 

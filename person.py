@@ -1,8 +1,11 @@
 class Person:
-    __list_persons = []
-    def __init__(self, name, employee_id):
+    __count_persons = 0
+
+    def __init__(self, employee_id):
+        name = input('Enter the name: ')
         self.__name= name
-        self.__employee_id = employee_id + str(f'-{len(self.__list_persons) + 1}')
+        Person.__count_persons += 1
+        self.__employee_id = employee_id + str(self.__count_persons)
 
     @property
     def name(self):
@@ -17,13 +20,5 @@ class Person:
         return self.__employee_id
 
     @property
-    def list_persons(self):
-        return self.__list_persons
-
-    @classmethod
-    def add_person_to_list(cls, person):
-        cls.__list_persons.append(person)
-
-    @classmethod
-    def get_list_persons(cls):
-        return cls.__list_persons
+    def count_persons(self):
+        return Person.__count_persons
