@@ -10,19 +10,19 @@ class Zoo:
     __employees = [] # список співробітників
     __zookeepers = [] # список персоналу, що відповідають за вол'єри
 
-    # @property
-    # def animals(self):
-    #     return self.__animals
     @property
     def animals(self):
-        str_list_animals = f'\n\t***\tLIST ANIMALS:\t***\n\n'
-        if self.__animals:
-            for index, [animal, enclosure] in enumerate(self.__animals):
-                str_list_animals += f'\t{index + 1}. {animal}\t-\t{enclosure}\n'
-        else:
-            str_list_animals += f'\n\tNo data\n'
-
-        return str_list_animals
+        return self.__animals
+    # @property
+    # def animals(self):
+    #     str_list_animals = f'\n\t***\tLIST ANIMALS:\t***\n\n'
+    #     if self.__animals:
+    #         for index, [animal, enclosure] in enumerate(self.__animals):
+    #             str_list_animals += f'\t{index + 1}. {animal}\t-\t{enclosure}\n'
+    #     else:
+    #         str_list_animals += f'\n\tNo data\n'
+    #
+    #     return str_list_animals
 
     @animals.setter
     def animals(self, animal):
@@ -53,8 +53,8 @@ class Zoo:
         return self.__employees
 
     @employees.setter
-    def employees(self, new_admin):
-        self.__employees.append(new_admin)
+    def employees(self, new_employee):
+        self.__employees.append(new_employee)
 
     @property
     def zookeepers(self):
@@ -96,7 +96,6 @@ class Zoo:
         self.animals = new_animal # додати тварину у загальний список тварин
         print(f'{animal} place to enclosure "{enclosure}"')
 
-
     def choose_enclosure(self):
         Menu.display_list('LIST ENCLOSURES: ', self.__enclosures)
         choice = Menu.get_user_choice(len(self.__enclosures))
@@ -109,13 +108,13 @@ class Zoo:
         size = input("Enter a size of the enclosures: ")
         enclosure = Enclosure(enclosure_id, size)
         print(f'\nAdded new enclosure\n\tid: {enclosure.enclosure_id}, size: {size}')
-        self.enclosures = enclosure # Додати вол'єр у список вол'єрів
+        self.__enclosures.append(enclosure) # Додати вол'єр у список вол'єрів
         input('\nPress any key to continue ')
 
     def list_enclosures(self):
         if self.__enclosures:
             list_enclosures = []
-            for enclosure in self.enclosures:
+            for enclosure in self.__enclosures:
                 animals = ''
                 if enclosure.animals:
                     for index, animal in enumerate(enclosure.animals):
@@ -131,7 +130,7 @@ class Zoo:
 
     def add_employee(self):
         employee = Employee()
-        self.employees = employee
+        self.__employees.append(employee)
 
     def list_employees(self):
         Menu.display_list('List employees', self.employees)

@@ -36,24 +36,24 @@ list_main_menu = [
 # main_menu = Menu('MAIN MENU:', list_main_menu)
 
 
-def start_menu():
-    # global list_main_menu
-    while True:
-        Menu.display_menu('MAIN MENU', list_main_menu)
-        choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
-        match choice_item_menu:
-            case 1:
-                print(data_zoo.animals)
-                print(data_zoo.enclosures)
-                input('Press any key to continue')
-            case 2:
-                go_to_menu_animals()
-            case 3:
-                go_to_menu_enclosures()
-            case 4:
-                go_to_menu_employee()
-            case 5:
-                exit()
+# def start_menu():
+#     # global list_main_menu
+#     while True:
+#         Menu.display_menu('MAIN MENU', list_main_menu)
+#         choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
+#         match choice_item_menu:
+#             case 1:
+#                 print(data_zoo.animals)
+#                 print(data_zoo.enclosures)
+#                 input('Press any key to continue')
+#             case 2:
+#                 go_to_menu_animals()
+#             case 3:
+#                 go_to_menu_enclosures()
+#             case 4:
+#                 go_to_menu_employee()
+#             case 5:
+#                 exit()
 
 
 def go_to_menu_animals():
@@ -81,10 +81,13 @@ def go_to_menu_enclosures():
         match choice_menu:
             case 1:
                 data_zoo.create_enclosure()
+                input('Press eny key to continue ')
+            case 2:
+                print('Delete')
+                input('Press eny key to continue ')
             case 3:
                 print(data_zoo.enclosures)
                 input('Press eny key to continue ')
-
             case 4:
                 break
 
@@ -111,8 +114,26 @@ def go_to_menu_employee():
 
 if __name__ == '__main__':
 
-    start_menu()
-
+    # start_menu()
+# global list_main_menu
+    while True:
+        Menu.display_menu('MAIN MENU', list_main_menu)
+        choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
+        match choice_item_menu:
+            case 1:
+                print(data_zoo.animals)
+                print(data_zoo.enclosures)
+                print(data_zoo.employees)
+                print(data_zoo.zookeepers)
+                input('Press any key to continue')
+            case 2:
+                go_to_menu_animals()
+            case 3:
+                go_to_menu_enclosures()
+            case 4:
+                go_to_menu_employee()
+            case 5:
+                exit()
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
