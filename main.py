@@ -1,6 +1,7 @@
 from menu import *
 from animal import Animal
 from enclosure import Enclosure
+from temp import MyZoo
 from zookeeper import Zookeeper, Employee
 from zoo import Zoo
 
@@ -24,7 +25,7 @@ item_menu_employees = [
     'List zookeepers',
 ]
 
-data_zoo = Zoo()
+data_zoo = MyZoo()
 
 list_main_menu = [
     'Data zoo',
@@ -32,29 +33,6 @@ list_main_menu = [
     'Enclosures',
     'Employees',
 ]
-
-# main_menu = Menu('MAIN MENU:', list_main_menu)
-
-
-# def start_menu():
-#     # global list_main_menu
-#     while True:
-#         Menu.display_menu('MAIN MENU', list_main_menu)
-#         choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
-#         match choice_item_menu:
-#             case 1:
-#                 print(data_zoo.animals)
-#                 print(data_zoo.enclosures)
-#                 input('Press any key to continue')
-#             case 2:
-#                 go_to_menu_animals()
-#             case 3:
-#                 go_to_menu_enclosures()
-#             case 4:
-#                 go_to_menu_employee()
-#             case 5:
-#                 exit()
-
 
 def go_to_menu_animals():
     while True:
@@ -114,8 +92,6 @@ def go_to_menu_employee():
 
 if __name__ == '__main__':
 
-    # start_menu()
-# global list_main_menu
     while True:
         Menu.display_menu('MAIN MENU', list_main_menu)
         choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
