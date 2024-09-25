@@ -26,8 +26,9 @@ class MyZoo:
 
         lists_data_zoo += f'\n\n{' ' * 5}*** LIST ANIMALS ***\n\n'
         if self.__animals:
-            for index, animal in enumerate(self.__animals):
-                lists_data_zoo += f'{index + 1}. {animal[0]} - {animal[1]}\n'
+            # for index, animal in enumerate(self.__animals):
+            #     lists_data_zoo += f'{index + 1}. {animal[0]} - {animal[1]}\n'
+            print(type(self.__animals))
         else:
             lists_data_zoo += 'List is empty\n\n'
 
