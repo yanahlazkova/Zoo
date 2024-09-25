@@ -1,7 +1,7 @@
 from menu import *
 from animal import Animal
 from enclosure import Enclosure
-from temp import MyZoo
+from myzoo import MyZoo
 from zookeeper import Zookeeper, Employee
 from zoo import Zoo
 
@@ -97,10 +97,14 @@ if __name__ == '__main__':
         choice_item_menu = Menu.get_user_choice(len(list_main_menu) + 1)
         match choice_item_menu:
             case 1:
-                print(data_zoo.animals)
-                print(data_zoo.enclosures)
-                print(data_zoo.employees)
-                print(data_zoo.zookeepers)
+                print(data_zoo)
+                # print(data_zoo.animals)
+                # print(data_zoo.enclosures)
+                # print(data_zoo.employees)
+                # print(data_zoo.zookeepers)                # print(data_zoo.animals)
+                # print(data_zoo.enclosures)
+                # print(data_zoo.employees)
+                # print(data_zoo.zookeepers)
                 input('Press any key to continue')
             case 2:
                 go_to_menu_animals()

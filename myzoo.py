@@ -21,6 +21,36 @@ class MyZoo:
     __zookeepers = Descriptor()  # список персоналу, що відповідають за вол'єри
 
 
+    def __str__(self):
+        lists_data_zoo = ''
+
+        lists_data_zoo += f'\n\n{' ' * 5}*** LIST ANIMALS ***\n\n'
+        if self.__animals:
+            for index, animal in enumerate(self.__animals):
+                lists_data_zoo += f'{index + 1}. {animal[0]} - {animal[1]}\n'
+        else:
+            lists_data_zoo += 'List is empty\n\n'
+
+        lists_data_zoo += f'\n\n{' ' * 5}*** LIST ENCLOSURES ***\n\n'
+        if self.__enclosures:
+            for index, enclosures in enumerate(self.__animals):
+                lists_data_zoo += f'{index + 1}. {enclosures[0]} - {enclosures[1]}\n'
+        else:
+            lists_data_zoo += 'List is empty\n\n'
+
+        lists_data_zoo += f'\n\n{' ' * 5}*** LIST EMPLOYEES ***\n\n'
+        if self.__employees:
+            pass
+        else:
+            lists_data_zoo += 'List is empty\n\n'
+        lists_data_zoo += f'\n\n{' ' * 5}*** LIST ZOOKEEPERS ***\n\n'
+        if self.__zookeepers:
+            pass
+        else:
+            lists_data_zoo += 'List is empty\n\n'
+
+        return lists_data_zoo
+
     @property
     def animals(self):
         return self.__animals
@@ -58,11 +88,12 @@ class MyZoo:
         new_species = input("Enter species the animal: ")
         new_age = input("Enter age the animal: ")
         new_animal = Animal(new_name, new_species, int(new_age))
+        print('проверка списка:', len(self.__enclosures))
         self.place_animal_to_enclosure(new_animal)
 
     def place_animal_to_enclosure(self, animal):
         # поміщає тварину до вол'єру
-        if self.__enclosures == 'List is empty':
+        if not self.__enclosures:
             print('\nВол\'єри ще не заведені!!!\n')
             self.create_enclosure()
 
@@ -83,15 +114,6 @@ class MyZoo:
         size = input("Enter a size of the enclosures: ")
         enclosure = Enclosure(enclosure_id, size)
         print(f'\nAdded new enclosure\n\tid: {enclosure.enclosure_id}, size: {size}')
-        self.__enclosures.append(enclosure) # Додати вол'єр у список вол'єрів
+        self.__enclosures = enclosure # Додати вол'єр у список вол'єрів
         input('\nPress any key to continue ')
 
-zoo = MyZoo()
-
-print(zoo.animals)
-
-zoo.animals = 'cat'
-print(zoo.animals)
-zoo.animals = 'dog'
-
-print(zoo.animals)
