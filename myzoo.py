@@ -1,25 +1,14 @@
 from animal import Animal
-from decorators import Descriptor
+from decorators import Descriptor, check_entered_data
 from enclosure import Enclosure
 from menu import Menu
 
-
-def check_list_empty(func):
-    def check(*args):
-        list_check = func(*args)
-        if list_check:
-            # func(*args)
-            return print(list_check)
-        else:
-            print('List is empty')
-    return check
 
 class MyZoo:
     __animals = Descriptor()  # список тварин
     __enclosures = Descriptor()  # список вол'єрів
     __employees = Descriptor()  # список співробітників
     __zookeepers = Descriptor()  # список персоналу, що відповідають за вол'єри
-
 
     def __str__(self):
         lists_data_zoo = ''
@@ -66,15 +55,16 @@ class MyZoo:
 
     @enclosures.setter
     def enclosures(self, enclosure):
-        self.__enclosures.append(enclosure)
-
+        # self.__enclosures.append(enclosure)
+        self.__enclosures = enclosure
     @property
     def employees(self):
         return self.__employees
 
     @employees.setter
     def employees(self, employee):
-        self.__employees.append(employee)
+        # self.__employees.append(employee)
+        self.__employees = employee
 
     @property
     def zookeepers(self):
@@ -82,15 +72,24 @@ class MyZoo:
 
     @zookeepers.setter
     def zookeepers(self, zookeeper):
-        self.__zookeepers.append(zookeeper)
+        # self.__zookeepers.append(zookeeper)
+        self.__zookeepers = zookeeper
 
     def add_animal(self):
-        new_name = input("Enter name the animal: ")
-        new_species = input("Enter species the animal: ")
-        new_age = input("Enter age the animal: ")
-        new_animal = Animal(new_name, new_species, int(new_age))
+        new_name = "Enter name the animal: "
+        new_species = "Enter species the animal: "
+        new_age = "Enter age the animal: "
+        new_animal = self.create_obj_animal(new_name, new_species, new_age)
         print('проверка списка:', len(self.__enclosures))
         self.place_animal_to_enclosure(new_animal)
+
+    @check_entered_data
+    @staticmethod
+    def create_obj_animal(new_data):
+        new_animal = Animal(*new_data)
+        print('new_animal: ', new_animal)
+        return new_animal
+
 
     def place_animal_to_enclosure(self, animal):
         # поміщає тварину до вол'єру
