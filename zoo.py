@@ -126,7 +126,7 @@ class Zoo:
         else:
             print('List enclosures: No data\n')
 
-    # ************** Методи для меню PERSONS
+    # ************** Методи для меню Employee
 
     def add_employee(self):
         employee = Employee()

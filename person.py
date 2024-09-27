@@ -1,9 +1,12 @@
+from decorators import check_entered_data
+
+
 class Person:
     __count_persons = 0
 
-    def __init__(self, employee_id):
-        name = input('Enter the name: ')
-        self.__name= name
+    def __init__(self, employee_id, name):
+        # name = input('Enter the name: ')
+        self.__name = name
         Person.__count_persons += 1
         self.__employee_id = employee_id + str(self.__count_persons)
 

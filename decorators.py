@@ -1,7 +1,7 @@
 def check_entered_data(func):
-    checked_data = []
 
     def wrapper(self, *args):
+        checked_data = []
         for arg in args:
             while True:
                 elem = input(arg)
@@ -10,7 +10,7 @@ def check_entered_data(func):
                     break
                 else:
                     print('Данні повинні бути заповнені')
-        data = func(checked_data)
+        data = func(self, checked_data)
         return data
     return wrapper
 
@@ -32,10 +32,8 @@ class Descriptor:
 
     def __get__(self, instance, owner):
         return self.list_data
-        # return instance.__dict__[self.list_name]
 
     def __set__(self, instance, value):
-        print('method set')
         self.list_data.append(value)
 
     def __set_name__(self, owner, name):

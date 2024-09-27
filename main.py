@@ -45,7 +45,7 @@ def go_to_menu_animals():
             case 2:
                 pass
             case 3:
-                print(data_zoo.animals)
+                print(data_zoo.list_animals())
                 input('Press eny key to continue ')
 
             case 4:
@@ -58,13 +58,13 @@ def go_to_menu_enclosures():
         choice_menu = Menu.get_user_choice(len(item_menu_enclosure) + 1)
         match choice_menu:
             case 1:
-                data_zoo.create_enclosure()
+                data_zoo.add_enclosure()
                 input('Press eny key to continue ')
             case 2:
                 print('Delete')
                 input('Press eny key to continue ')
             case 3:
-                print(data_zoo.enclosures)
+                print(data_zoo.list_enclosures())
                 input('Press eny key to continue ')
             case 4:
                 break
@@ -78,12 +78,12 @@ def go_to_menu_employee():
             case 1:
                 data_zoo.add_employee()
             case 2:
-                data_zoo.list_employees()
+                print(data_zoo.list_employees())
                 input('Press eny key to continue ')
             case 3:
                 data_zoo.add_enclosure_to_zookeeper()
             case 4:
-                data_zoo.list_zookeepers()
+                print(data_zoo.list_zookeepers())
                 input('Press eny key to continue ')
             case 5:
                 break
@@ -98,13 +98,6 @@ if __name__ == '__main__':
         match choice_item_menu:
             case 1:
                 print(data_zoo)
-                # print(data_zoo.animals)
-                # print(data_zoo.enclosures)
-                # print(data_zoo.employees)
-                # print(data_zoo.zookeepers)                # print(data_zoo.animals)
-                # print(data_zoo.enclosures)
-                # print(data_zoo.employees)
-                # print(data_zoo.zookeepers)
                 input('Press any key to continue')
             case 2:
                 go_to_menu_animals()

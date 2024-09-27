@@ -4,14 +4,19 @@ from person import Person
 class Employee(Person):
     __pref_id = 'em00-'
 
-    def __init__(self):
-        super().__init__(self.__pref_id)
+    # def __init__(self):
+    def __init__(self, job_title, name):
+        super().__init__(self.__pref_id, name)
         print(f'id: {self.employee_id}')
-        self.__job_title = input('Enter the job title: ')
+        # self.__job_title = input('Enter the job title: ')
+        self.__job_title = job_title
 
     def __str__(self):
         return f'{self.__job_title}\t-\tid: {self.employee_id}, name: {self.name}'
 
+    @property
+    def job_title(self):
+        return self.__job_title
 
 class Zookeeper:
     __assigned_enclosures = []

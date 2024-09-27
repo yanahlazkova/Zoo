@@ -17,5 +17,9 @@ class Enclosure:
     def enclosure_id(self):
         return self.__enclosure_id
 
+    @property
+    def size(self):
+        return self.__size
+
     def __str__(self):
         return f"Вол'єр id-{self.__enclosure_id} size-{self.__size}"
