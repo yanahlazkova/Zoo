@@ -122,12 +122,15 @@ class MyZoo:
             lists_animal += 'List is empty\n\n'
         return lists_animal
 
-    def deleted_animal(self):
+    ef deleted_animal(self):
         if self.__animals:
             print(self.list_animals())
             choice_item = Menu.get_user_choice(len(self.__animals))
             choice_animal = self.__animals[choice_item - 1]
             self.__animals.remove(choice_animal)
+            enclosures = choice_animal[1]
+            enclosures.animals.remove(choice_animal[0])
+            # print(*enclosures.animals)
         else:
             print(f'List "ANIMALS" is empty')
             input("Press any key ")
