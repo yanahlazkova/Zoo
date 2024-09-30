@@ -61,7 +61,7 @@ def go_to_menu_enclosures():
                 data_zoo.add_enclosure()
                 input('Press eny key to continue ')
             case 2:
-                print('Delete')
+                data_zoo.deleted_enclosure()
                 input('Press eny key to continue ')
             case 3:
                 print(data_zoo.list_enclosures())

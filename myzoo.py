@@ -122,7 +122,7 @@ class MyZoo:
             lists_animal += 'List is empty\n\n'
         return lists_animal
 
-    ef deleted_animal(self):
+    def deleted_animal(self):
         if self.__animals:
             print(self.list_animals())
             choice_item = Menu.get_user_choice(len(self.__animals))
@@ -168,6 +168,16 @@ class MyZoo:
         else:
             lists_enclosures += 'List is empty\n\n'
         return lists_enclosures
+
+    def deleted_enclosure(self):
+        if self.__enclosures:
+            print(self.list_enclosures())
+            choice_item = Menu.get_user_choice(len(self.__enclosures))
+            choice_enclosure = self.__enclosures[choice_item - 1]
+            # if choice_enclosure.animal
+            self.__enclosures.remove(choice_enclosure)
+
+
 
 ########## Методи роботи з даними employees #########
 
@@ -247,6 +257,7 @@ class MyZoo:
             lists_data_zoo += 'List is empty\n\n'
 
         return lists_data_zoo
+
 
 
 
