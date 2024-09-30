@@ -43,7 +43,7 @@ def go_to_menu_animals():
                 # print('Add new animal')
                 data_zoo.add_animal()
             case 2:
-                pass
+                data_zoo.deleted_animal()
             case 3:
                 print(data_zoo.list_animals())
                 input('Press eny key to continue ')

@@ -106,6 +106,7 @@ class MyZoo:
 
     @staticmethod
     def choose_item(list_items):
+        # display list enclosures and do choice
         Menu.display_list('LIST ENCLOSURES: ', list_items)
         choice = Menu.get_user_choice(len(list_items))
         return list_items[choice - 1]
@@ -120,6 +121,18 @@ class MyZoo:
         else:
             lists_animal += 'List is empty\n\n'
         return lists_animal
+
+    def deleted_animal(self):
+        if self.__animals:
+            print(self.list_animals())
+            choice_item = Menu.get_user_choice(len(self.__animals))
+            choice_animal = self.__animals[choice_item - 1]
+            self.__animals.remove(choice_animal)
+        # else:
+        #     print(f'List "ANIMALS" is empty')
+        #     input("Press any key ")
+        print(self.list_animals())
+
 
 
 ########## Методи роботи з даними eclosures #########

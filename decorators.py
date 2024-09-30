@@ -14,15 +14,6 @@ def check_entered_data(func):
         return data
     return wrapper
 
-# @check_entered_data
-# def create_obj_animal(new_name, new_species, new_age):
-#     pass
-#
-# new_name = ["Enter name the animal: ", str]
-# new_species = ["Enter species the animal: ", str]
-# new_age = ["Enter age the animal: ", int]
-# create_obj_animal(new_name, new_species, new_age)
-
 
 class Descriptor:
     def __init__(self, list_data=None):
