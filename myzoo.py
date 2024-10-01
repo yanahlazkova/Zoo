@@ -83,7 +83,7 @@ class MyZoo:
         new_species = "Enter species the animal: "
         new_age = "Enter age the animal: "
         new_animal = self.create_obj_animal(new_name, new_species, new_age)
-        print('проверка списка:', len(self.__enclosures))
+        # print('проверка списка:', len(self.__enclosures))
         self.place_animal_to_enclosure(new_animal)
 
     @check_entered_data
@@ -103,6 +103,28 @@ class MyZoo:
         new_animal = [animal, enclosure]
         self.animals = new_animal # додати тварину у загальний список тварин
         print(f'{animal} place to enclosure "{enclosure}"')
+
+    def move_animal_into_enclosure(self):
+        # переміщення тварини у інший вол'єр
+        if self.__animals:
+            # вибір травини
+            print(self.list_animals())
+            choice_item_animal = Menu.get_user_choice(len(self.__animals))
+            choice_animal, current_enclosure = self.__animals[choice_item_animal - 1]
+            # вибір вол'єра
+            print((self.list_enclosures()))
+            choice_item_enclosure = Menu.get_user_choice(len(self.__enclosures))
+            choice_enclosure = self.__enclosures[choice_item_enclosure - 1]
+            current_enclosure.animals.remove(choice_animal)
+            current_enclosure = choice_enclosure
+            self.__animals[choice_item_animal - 1][1] = choice_enclosure
+            choice_enclosure.animals = choice_animal
+
+            print(f'Animal {self.__animals[choice_item_animal - 1][0]} moved '
+                  f'to enclosure {self.__animals[choice_item_animal - 1][1]}')
+        else:
+            print('List of animals is empty')
+            input('Press any key to continue ')
 
     @staticmethod
     def choose_item(list_items):
@@ -170,6 +192,7 @@ class MyZoo:
         return lists_enclosures
 
     def deleted_enclosure(self):
+        # TODO: при видаленні перевірити чи є в списку тварини, якщо є не видаляти, а спочатку перемістити їх в інший
         if self.__enclosures:
             print(self.list_enclosures())
             choice_item = Menu.get_user_choice(len(self.__enclosures))

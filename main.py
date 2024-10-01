@@ -8,6 +8,7 @@ from zoo import Zoo
 item_menu_animal = [
     'Add animal to enclosure',
     'Delete animal without enclosure',
+    'Move the animal into the enclosure',
     'List animals'
 ]
 # menu_animal = SubMenu('MENU ANIMAL', item_menu_animal)
@@ -45,10 +46,12 @@ def go_to_menu_animals():
             case 2:
                 data_zoo.deleted_animal()
             case 3:
+                # Move the animal into the enclosure
+                data_zoo.move_animal_into_enclosure()
+            case 4:
                 print(data_zoo.list_animals())
                 input('Press eny key to continue ')
-
-            case 4:
+            case 5:
                 break
 
 
