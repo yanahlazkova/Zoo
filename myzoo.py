@@ -106,6 +106,10 @@ class MyZoo:
 
     def move_animal_into_enclosure(self):
         # переміщення тварини у інший вол'єр
+        if len(self.__enclosures) == 1:
+            print('Список вол\'єрів пустий, немає куди переміщати')
+            input('Press any key ')
+            return
         if self.__animals:
             # вибір травини
             print(self.list_animals())
@@ -192,8 +196,6 @@ class MyZoo:
         return lists_enclosures
 
     def deleted_enclosure(self):
-        # TODO: при видаленні перевірити чи є в списку тварини,
-        #  якщо є - не видаляти, а спочатку перемістити їх в інший
         if self.__enclosures:
             print(self.list_enclosures())
             choice_item = Menu.get_user_choice(len(self.__enclosures))
