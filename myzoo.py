@@ -192,12 +192,15 @@ class MyZoo:
         return lists_enclosures
 
     def deleted_enclosure(self):
-        # TODO: при видаленні перевірити чи є в списку тварини, якщо є не видаляти, а спочатку перемістити їх в інший
+        # TODO: при видаленні перевірити чи є в списку тварини,
+        #  якщо є - не видаляти, а спочатку перемістити їх в інший
         if self.__enclosures:
             print(self.list_enclosures())
             choice_item = Menu.get_user_choice(len(self.__enclosures))
             choice_enclosure = self.__enclosures[choice_item - 1]
-            # if choice_enclosure.animal
+            if choice_enclosure.animals:
+                print('У вол\'єрі є тварини, перемістіть їх у інший вол\'єр і повторіть видалення знову' )
+                return
             self.__enclosures.remove(choice_enclosure)
 
 
