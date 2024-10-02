@@ -16,7 +16,6 @@ item_menu_animal = [
 item_menu_enclosure = [
     'Add enclosure',
     'Delete enclosure',
-    'Move the animal into the enclosure',
     'List enclosure'
 ]
 
@@ -68,11 +67,9 @@ def go_to_menu_enclosures():
                 data_zoo.deleted_enclosure()
                 input('Press eny key to continue ')
             case 3:
-                data_zoo.move_animal_into_enclosure()
-            case 4:
                 print(data_zoo.list_enclosures())
                 input('Press eny key to continue ')
-            case 5:
+            case 4:
                 break
 
 
