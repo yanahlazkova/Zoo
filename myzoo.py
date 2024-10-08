@@ -106,7 +106,7 @@ class MyZoo:
 
     def move_animal_into_enclosure(self):
         # переміщення тварини у інший вол'єр
-        if len(self.__enclosures) == 1:
+        if len(self.__enclosures) <= 1:
             print('Список вол\'єрів пустий, немає куди переміщати')
             input('Press any key ')
             return
