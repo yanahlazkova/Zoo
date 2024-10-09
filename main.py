@@ -5,6 +5,9 @@ from myzoo import MyZoo
 from zookeeper import Zookeeper, Employee
 from zoo import Zoo
 
+import django
+
+
 item_menu_animal = [
     'Add animal to enclosure',
     'Delete animal without enclosure',
