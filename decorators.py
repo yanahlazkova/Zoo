@@ -30,3 +30,10 @@ class Descriptor:
     def __set_name__(self, owner, name):
         self.list_name = name
         print('self.list_name: ', name)
+
+    def delete_value(self, value):
+        if value in self.list_data:
+            self.list_data.remove(value)
+            print(f"'{value}' видалено зі списку {self.list_name}")
+        else:
+            print(f"'{value}' не знайдено у списку {self.list_name}")
