@@ -216,7 +216,7 @@ class MyZoo:
 
         print(f'\nAdded new employee:\n\t{new_employee}')
         self.__employees = new_employee  # Додати працівника у список працівників
-        input('Press any key: ')
+        input('Press any key ')
 
     @check_entered_data
     def create_employee(self, new_employee):
