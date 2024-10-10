@@ -1,9 +1,5 @@
 from menu import *
-from animal import Animal
-from enclosure import Enclosure
 from myzoo import MyZoo
-from zookeeper import Zookeeper, Employee
-from zoo import Zoo
 
 import django
 
