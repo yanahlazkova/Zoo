@@ -148,7 +148,7 @@ class MyZoo:
             lists_animal += 'List is empty\n\n'
         return lists_animal
 
-    def deleted_animal(self):
+    def delete_animal(self):
         if self.__animals:
             print(self.list_animals())
             choice_item = Menu.get_user_choice(len(self.__animals))
@@ -195,7 +195,7 @@ class MyZoo:
             lists_enclosures += 'List is empty\n\n'
         return lists_enclosures
 
-    def deleted_enclosure(self):
+    def delete_enclosure(self):
         if self.__enclosures:
             print(self.list_enclosures())
             choice_item = Menu.get_user_choice(len(self.__enclosures))
@@ -204,7 +204,8 @@ class MyZoo:
                 print('У вол\'єрі є тварини, перемістіть їх у інший вол\'єр і повторіть видалення знову' )
                 return
             self.__enclosures.remove(choice_enclosure)
-
+        else:
+            print('Список вол\'єрів пустий')
 
 
 ########## Методи роботи з даними employees #########
@@ -286,6 +287,15 @@ class MyZoo:
 
         return lists_data_zoo
 
-
-
+    def delete_employee(self):
+        if self.__employees:
+            Menu.display_list('LIST EMPLOYEES', self.__employees)
+            choice = Menu.get_user_choice(len(self.__employees))
+            choice_employee = self.__employees[choice - 1]
+            print(f'\nYour choice: {choice_employee}\n')
+            input('Press eny key to continue ')
+            self.__employees.pop(choice - 1)
+            print(f'\n{choice_employee}  DELETED\n')
+        else:
+            print('Список співробітників пустий.\n')
 
