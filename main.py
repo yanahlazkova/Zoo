@@ -1,9 +1,6 @@
 from menu import *
 from myzoo import MyZoo
 
-import django
-
-
 item_menu_animal = [
     'Add animal to enclosure',
     'Delete animal without enclosure',
@@ -46,7 +43,7 @@ def go_to_menu_animals():
                 # print('Add new animal')
                 data_zoo.add_animal()
             case 2:
-                data_zoo.deleted_animal()
+                data_zoo.delete_animal()
             case 3:
                 # Move the animal into the enclosure
                 data_zoo.move_animal_into_enclosure()
@@ -66,7 +63,7 @@ def go_to_menu_enclosures():
                 data_zoo.add_enclosure()
                 input('Press eny key to continue ')
             case 2:
-                data_zoo.deleted_enclosure()
+                data_zoo.delete_enclosure()
                 input('Press eny key to continue ')
             case 3:
                 data_zoo.move_animal_into_enclosure()
@@ -88,8 +85,8 @@ def go_to_menu_employee():
                 print(data_zoo.list_employees())
                 input('Press eny key to continue ')
             case 3:
-                # Delete employee
-                pass
+                data_zoo.delete_employee()
+                input('Press eny key to continue ')
             case 4:
                 data_zoo.add_enclosure_to_zookeeper()
             case 5:
