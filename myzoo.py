@@ -213,7 +213,7 @@ class MyZoo:
     def add_employee(self):
         new_employee = 'Enter the job title: '
         new_name_person = 'Enter the name: '
-        new_employee = self.create_employee(new_name_person, new_employee)
+        new_employee = self.create_employee(new_employee, new_name_person)
 
         print(f'\nAdded new employee:\n\t{new_employee}')
         self.__employees = new_employee  # Додати працівника у список працівників
@@ -234,11 +234,12 @@ class MyZoo:
             lists_employee += 'List is empty\n\n'
         return lists_employee
 
-    def add_enclosure_to_zookeeper(self):
+    def assign_enclosure_to_zookeeper(self):
+        # TODO: виправити додавання вол'єру
         choice_employee = None
         choice_enclosure = None
         if self.__employees:
-            Menu.display_list('List employees:', self.__employees)
+            Menu.display_list('LIST EMPLOYEES:', self.__employees)
             choice = Menu.get_user_choice(len(self.__employees))
             choice_employee = self.__employees[choice - 1]
             print(f'Your choice: {choice_employee}')
@@ -247,6 +248,7 @@ class MyZoo:
             print('The list of employees is empty')
             input('Press any key ')
             return
+
         if self.__enclosures:
             choice_enclosure = self.choose_item(self.__enclosures)
             print(f'Your choice: {choice_enclosure}')
@@ -255,21 +257,21 @@ class MyZoo:
             print("The list of enclosures is empty")
             input('Press any key ')
             return
-        self.place_enclosure_to_employee(choice_employee, choice_enclosure)
+        self.place_enclosure_into_employee(choice_employee, choice_enclosure)
 
-    def place_enclosure_to_employee(self, employee, enclosure):
+    def place_enclosure_into_employee(self, employee, enclosure):
         # Перевірка, чи існує співробітник у списку __zookeepers
         if self.__zookeepers:
-            for zookeeper, enclosures in self.__zookeepers:
+            for zookeeper, list_enclosures in self.__zookeepers:
                 if employee == zookeeper:
                     print(f'Employee {employee} is in the list ')
-                    print(f'list enclosures: {enclosures}')
-                    zookeeper.assigned_enclosures = enclosure
+                    print(f'list enclosures: {list_enclosures}')
+                    zookeeper.list_enclosures = enclosure
                 else:
                     new_zookeeper = Zookeeper(employee, enclosure)
                     self.__zookeepers = new_zookeeper
         else:
-            print('list is empty')
+            print('list is empty. Added new zookeeper into the list')
             new_zookeeper = Zookeeper(employee, enclosure)
             self.__zookeepers = new_zookeeper
 
@@ -278,10 +280,12 @@ class MyZoo:
         lists_data_zoo += f'\n\n{' ' * 5}*** LIST ZOOKEEPERS ***\n\n'
         if self.__zookeepers:
             for index, zookeeper in enumerate(self.__zookeepers):
-                lists_data_zoo += f'{index + 1}. {zookeeper}:\n'
-                if zookeeper.assigned_enclosures:
-                    for index, enclosure in enumerate(zookeeper.assigned_enclosures):
+                lists_data_zoo += f'{index + 1}. {zookeeper.zookeeper}:\n'
+                if zookeeper.list_enclosures:
+                    for index, enclosure in enumerate(zookeeper.list_enclosures):
                         lists_data_zoo +=f'\t\t{index + 1}. {enclosure}\n'
+                else:
+                    lists_data_zoo +=f'\t\tList of the enclosures is empty\n'
         else:
             lists_data_zoo += 'List is empty\n\n'
 
@@ -298,4 +302,21 @@ class MyZoo:
             print(f'\n{choice_employee}  DELETED\n')
         else:
             print('Список співробітників пустий.\n')
+
+    def remove_zookeeper_enclosure(self):
+        if self.__zookeepers:
+            print(self.list_zookeepers())
+            choice = Menu.get_user_choice(len(self.__zookeepers))
+            choice_zookeeper = self.__zookeepers[choice - 1]
+            print(f'\nYour choice: {choice_zookeeper.zookeeper}\n')
+            list_enclosure = choice_zookeeper.list_enclosures
+            Menu.display_list('List employer\'s enclosure:', list_enclosure)
+            choice = Menu.get_user_choice(len(list_enclosure))
+            choice_enclosure = list_enclosure[choice - 1]
+            print(f'Your choice: {choice_enclosure}')
+            input('Press eny key to continue ')
+            choice_zookeeper.list_enclosures.pop(choice - 1)
+            print(f'\n{choice_enclosure}  DELETED\n')
+        else:
+            print('Список наглядачів за вол\'єрами пустий.\n')
 
