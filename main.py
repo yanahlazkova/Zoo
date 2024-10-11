@@ -20,8 +20,8 @@ item_menu_employees = [
     'Add employee',
     'List employees',
     'Delete employee',
-    'Add zookeeper',
-    'Delete zookeeper',
+    'Add enclosure to zookeeper',
+    'Remove the zookeeper\'s enclosure',
     'List zookeepers',
 ]
 
@@ -88,10 +88,11 @@ def go_to_menu_employee():
                 data_zoo.delete_employee()
                 input('Press eny key to continue ')
             case 4:
-                data_zoo.add_enclosure_to_zookeeper()
+                data_zoo.assign_enclosure_to_zookeeper()
             case 5:
                 # Delete zookeeper
-                pass
+                data_zoo.remove_zookeeper_enclosure()
+                input('Press eny key to continue ')
             case 6:
                 print(data_zoo.list_zookeepers())
                 input('Press eny key to continue ')
