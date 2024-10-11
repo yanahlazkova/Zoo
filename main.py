@@ -32,6 +32,7 @@ list_main_menu = [
     'Animals',
     'Enclosures',
     'Employees',
+    'Save to file'
 ]
 
 def go_to_menu_animals():
@@ -117,6 +118,9 @@ if __name__ == '__main__':
             case 4:
                 go_to_menu_employee()
             case 5:
+                data_zoo.save_to_file()
+                input('Press any key to continue')
+            case 6:
                 exit()
 
 
