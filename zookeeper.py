@@ -11,6 +11,12 @@ class Employee(Person):
         # self.__job_title = input('Enter the job title: ')
         self.__job_title = job_title
 
+    def to_dict(self):
+        return {
+            "job_title": self.__job_title,
+            "name": self.__name,
+        }
+
     def __str__(self):
         return f'{self.__job_title}\t-\tid: {self.employee_id}, name: {self.name}'
 

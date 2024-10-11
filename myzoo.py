@@ -1,3 +1,5 @@
+import json
+
 from animal import Animal
 from decorators import Descriptor, check_entered_data
 from enclosure import Enclosure
@@ -298,4 +300,15 @@ class MyZoo:
             print(f'\n{choice_employee}  DELETED\n')
         else:
             print('Список співробітників пустий.\n')
+
+    def save_to_file(self):
+        filename = "zoo_data.json"
+        data = {
+            "animals": [animal.to_dict() for animal in self.__animals],
+            "enclosures": [enclosure.to_dict() for enclosure in self.__enclosures],
+            "employees": self.__employees,
+            "zookeepers": self.__zookeepers
+        }
+        with open(filename, 'w') as file:
+            json.dump(data, file, indent=4)
 
