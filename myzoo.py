@@ -261,15 +261,18 @@ class MyZoo:
 
     def place_enclosure_into_employee(self, employee, enclosure):
         # Перевірка, чи існує співробітник у списку __zookeepers
+        print([zookeeper.zookeeper for zookeeper in self.__zookeepers if zookeeper.zookeeper == employee])
         if self.__zookeepers:
-            for zookeeper, list_enclosures in self.__zookeepers:
-                if employee == zookeeper:
-                    print(f'Employee {employee} is in the list ')
-                    print(f'list enclosures: {list_enclosures}')
-                    zookeeper.list_enclosures = enclosure
-                else:
-                    new_zookeeper = Zookeeper(employee, enclosure)
-                    self.__zookeepers = new_zookeeper
+            pass
+        #     if employee in self.__zookeepers.zookeeper:
+        #         # if employee == zookeeper.zookeeper:
+        #         print(f'Employee {employee} added in the list ')
+        #         # print(f'list enclosures: {zookeeper.list_enclosures}')
+        #         Menu.display_list('List of the enclosures', self.__enclosures)
+        #         zookeeper.list_enclosures = enclosure
+        #     else:
+        #         new_zookeeper = Zookeeper(employee, enclosure)
+        #         self.__zookeepers = new_zookeeper
         else:
             print('list is empty. Added new zookeeper into the list')
             new_zookeeper = Zookeeper(employee, enclosure)

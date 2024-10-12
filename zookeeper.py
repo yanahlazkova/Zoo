@@ -41,4 +41,5 @@ class Zookeeper:
 
     @list_enclosures.setter
     def list_enclosures(self, enclosure):
+        # TODO: виконати перевірку чи існує вже у списку enclosure
         self.__list_enclosures.append(enclosure)
