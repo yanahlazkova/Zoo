@@ -27,12 +27,11 @@ class Employee(Person):
 
 
 class Zookeeper:
-    __list_enclosures = []
 
     def __init__(self, employee: Employee, enclosure):
         self.__zookeeper = employee
         self.__enclosure = enclosure
-        self.__list_enclosures.append(self.__enclosure)
+        self.__list_enclosures = [enclosure]
 
     def __str__(self):
         return f'Zookeeper\t-\tid: {self.__zookeeper}, {self.__list_enclosures}'

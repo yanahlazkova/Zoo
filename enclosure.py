@@ -1,7 +1,7 @@
 class Enclosure:
     # Вольєр з атрибутами enclosure_id, size, animals (список тварин, які знаходяться у вольєрі)
     def __init__(self, enclosure_id, size):
-        # TODO: додати параметр title
+        # TODO: додати параметр title і при виводі вказувати його замість size
         self.__enclosure_id = 'v001-' + str(enclosure_id)
         self.__size = size
         self.__animals = []

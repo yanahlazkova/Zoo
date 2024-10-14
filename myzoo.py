@@ -235,45 +235,53 @@ class MyZoo:
         return lists_employee
 
     def assign_enclosure_to_zookeeper(self):
-        # TODO: виправити додавання вол'єру
         choice_employee = None
         choice_enclosure = None
         if self.__employees:
             Menu.display_list('LIST EMPLOYEES:', self.__employees)
             choice = Menu.get_user_choice(len(self.__employees))
             choice_employee = self.__employees[choice - 1]
-            print(f'Your choice: {choice_employee}')
-            input('Press any key ')
+            # print(f'Your choice: {choice_employee}')
+            # input('Press any key ')
         else:
-            print('The list of employees is empty')
+            print('!!! The list of employees is empty')
             input('Press any key ')
             return
 
         if self.__enclosures:
             choice_enclosure = self.choose_item(self.__enclosures)
-            print(f'Your choice: {choice_enclosure}')
-            input('Press any key ')
+            # print(f'Your choice: {choice_enclosure}')
+            # input('Press any key ')
         else:
-            print("The list of enclosures is empty")
+            print("!!! The list of enclosures is empty")
             input('Press any key ')
             return
         self.place_enclosure_into_employee(choice_employee, choice_enclosure)
 
     def place_enclosure_into_employee(self, employee, enclosure):
         # Перевірка, чи існує співробітник у списку __zookeepers
-        if self.__zookeepers:
-            found_employee = next((zookeeper for zookeeper in self.__zookeepers if zookeeper.zookeeper == employee), None)
-            if found_employee:
+        # if self.__zookeepers:
+        found_employee = next((zookeeper for zookeeper in self.__zookeepers if zookeeper.zookeeper == employee), None)
+        if found_employee:
+            found_enclosure = next((item for item in found_employee.list_enclosures if item == enclosure), None)
+            if found_enclosure:
+                print(f'!!! Вол\'єр {enclosure} вже існує у списку')
+                input('Press any key ')
+                return
+            else:
                 found_employee.list_enclosures = enclosure
                 print(f'Наглядачу {employee} додано вол\'єр {enclosure}')
-                Menu.display_list('List of the enclosures', found_employee.list_enclosures)
-            else:
-                new_zookeeper = Zookeeper(employee, enclosure)
-                self.__zookeepers = new_zookeeper
+            Menu.display_list('List of the enclosures', found_employee.list_enclosures)
+            input('Press any key ')
+            # else:
+            #     new_zookeeper = Zookeeper(employee, enclosure)
+            #     self.__zookeepers = new_zookeeper
         else:
-            print('list is empty. Added new zookeeper into the list')
             new_zookeeper = Zookeeper(employee, enclosure)
             self.__zookeepers = new_zookeeper
+            print('Added new zookeeper into the list')
+            Menu.display_list(employee.name, new_zookeeper.list_enclosures)
+            input('Press any key ')
 
     def list_zookeepers(self):
         lists_data_zoo = ''
