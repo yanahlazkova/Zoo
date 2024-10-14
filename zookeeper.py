@@ -31,7 +31,7 @@ class Zookeeper:
     def __init__(self, employee: Employee, enclosure):
         self.__zookeeper = employee
         self.__enclosure = enclosure
-        self.__list_enclosures = [enclosure]
+        self.__list_enclosures = [enclosure] if enclosure else []
 
     def __str__(self):
         return f'Zookeeper\t-\tid: {self.__zookeeper}, {self.__list_enclosures}'
@@ -45,6 +45,5 @@ class Zookeeper:
         return self.__list_enclosures
 
     @list_enclosures.setter
-    def list_enclosures(self, enclosure):
-        self.__list_enclosures.append(enclosure)
-        self.__list_enclosures.append(enclosure)
+    def list_enclosures(self, new_enclosure):
+        self.__list_enclosures.append(new_enclosure)
