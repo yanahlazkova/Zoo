@@ -1,5 +1,3 @@
-import json
-
 from animal import Animal
 from decorators import Descriptor, check_entered_data
 from enclosure import Enclosure
