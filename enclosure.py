@@ -22,5 +22,11 @@ class Enclosure:
     def size(self):
         return self.__size
 
+    def to_dict(self):
+        return {
+            "enclosure_id": self.__enclosure_id,
+            "size": self.__size
+        }
+
     def __str__(self):
         return f"Вол'єр id-{self.__enclosure_id} size-{self.__size}"
