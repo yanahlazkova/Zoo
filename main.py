@@ -3,7 +3,7 @@ from myzoo import MyZoo
 
 item_menu_animal = [
     'Add animal to enclosure',
-    'Delete animal without enclosure',
+    'Delete animal',
     'Move the animal into the enclosure',
     'List animals'
 ]

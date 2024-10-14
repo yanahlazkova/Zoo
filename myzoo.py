@@ -163,14 +163,14 @@ class MyZoo:
         print(self.list_animals())
 
 
-
 ########## Методи роботи з даними eclosures #########
 
     def add_enclosure(self):
         size = "Enter a size of the enclosures: "
-        new_enclosure = self.create_enclosure(size)
+        title = "Enter a name of the enclosures: "
+        new_enclosure = self.create_enclosure(title, size)
 
-        print(f'\nAdded new enclosure\n\tid: {new_enclosure.enclosure_id}, size: {new_enclosure.size}')
+        print(f'\nAdded new enclosure "{new_enclosure.title}"\n\tid: {new_enclosure.enclosure_id}, size: {new_enclosure.size}')
         self.__enclosures = new_enclosure  # Додати вол'єр у список вол'єрів
 
     @check_entered_data
