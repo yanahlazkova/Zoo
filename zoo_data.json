@@ -1,4 +1,41 @@
 {
     "animals": [
-        [
-            
+        {
+            "name": "Dan",
+            "species":  "Tiger",
+            "age": 4,
+            "enclosure": "v001-1"
+        },
+        {
+            "name": "Foxy",
+            "species":  "Elephant",
+            "age": 7,
+            "enclosure": "v001-2"
+        }
+    ],
+    "employees": [
+        {"name": "John", "job_title": "Zookeeper"},
+        {"name": "Alice", "job_title": "Manager"}
+    ],
+    "enclosures": [
+        {"enclosure_id": "v001-1", "title": "Savanna", "size": 100,
+        "animals": [
+            {
+            "name": "Dan",
+            "species":  "Tiger",
+            "age": 4
+            }
+        ]},
+        {"enclosure_id": "v001-2", "title": "Jungle", "size": 150,
+        "animals": [
+            {
+            "name": "Foxy",
+            "species":  "Elephant",
+            "age": 7
+            }
+        ]}
+    ],
+    "zookeepers": [
+        {"name": "John", "assigned_enclosure": "Savanna"}
+    ]
+}

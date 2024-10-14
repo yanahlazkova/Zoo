@@ -3,6 +3,7 @@ from decorators import Descriptor, check_entered_data
 from enclosure import Enclosure
 from menu import Menu
 from zookeeper import Employee, Zookeeper
+import json
 
 
 class MyZoo:
@@ -10,6 +11,62 @@ class MyZoo:
     __enclosures = Descriptor()  # список вол'єрів
     __employees = Descriptor()  # список співробітників
     __zookeepers = Descriptor()  # список персоналу, що відповідають за вол'єри
+
+    def __init__(self, data_file='zoo_data.json'):
+        # Загружаем данные при инициализации
+        self.load_from_file(data_file)
+
+    def load_from_file(self, file_name):
+        try:
+            with open(file_name, 'r') as file:
+                data = json.load(file)
+
+                # Загружаем вольеры
+                for enclosure_data in data['enclosures']:
+                    if enclosure_data['animals']:
+                        # TODO: виконати пошук тварин у списку self.__animals та додати у списк вол'єрів
+                        for animal in enclosure_data['animals']:
+                            self.find_animal(animal)
+                    id_enclosure = enclosure_data['enclosure_id'][enclosure_data['enclosure_id'].index('-') + 1:]
+                    self.__enclosures = Enclosure(id_enclosure, enclosure_data['title'], enclosure_data['size'])
+
+                # Загружаем животных
+                for animal_data in data['animals']:
+                    new_animal = Animal(animal_data['name'], animal_data['species'], animal_data['age'])
+                    enclosure_id = animal_data['enclosure']
+                    new_enclosure = self.find_enclosure(enclosure_id)
+                    self.__animals = [new_animal, new_enclosure]
+
+                # Загружаем сотрудников
+                for employee_data in data['employees']:
+                    self.__employees = Employee(employee_data['job_title'], employee_data['name'])
+
+                # Загружаем смотрителей и связываем их с вольерами
+                for zookeeper_data in data['zookeepers']:
+                    zookeeper = self.find_employee(zookeeper_data['name'])
+                    # TODO: виправити пошук по id
+                    enclosure = self.find_enclosure(zookeeper_data['assigned_enclosure'])
+                    if zookeeper and enclosure:
+                        self.__zookeepers = Zookeeper(zookeeper, enclosure)
+            print("Данные успешно загружены.")
+
+        except FileNotFoundError:
+            print(f"Файл {file_name} не найден.")
+
+    def find_animal(self, animals):
+        pass
+
+    def find_employee(self, name):
+        for employee in self.__employees:
+            if employee.name == name:
+                return employee
+        return None
+
+    def find_enclosure(self, id_enclosure):
+        for enclosure in self.__enclosures:
+            if enclosure.enclosure_id == id_enclosure:
+                return enclosure
+        return None
 
     def __str__(self):
         lists_data_zoo = ''
