@@ -22,6 +22,10 @@ class Person:
     def employee_id(self):
         return self.__employee_id
 
+    @employee_id.setter
+    def employee_id(self, new_employee_id):
+        self.__employee_id = new_employee_id
+
     @property
     def count_persons(self):
         return Person.__count_persons

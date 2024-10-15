@@ -3,6 +3,7 @@ from decorators import Descriptor, check_entered_data
 from enclosure import Enclosure
 from menu import Menu
 from zookeeper import Employee, Zookeeper
+import json
 
 
 class MyZoo:
@@ -10,6 +11,73 @@ class MyZoo:
     __enclosures = Descriptor()  # список вол'єрів
     __employees = Descriptor()  # список співробітників
     __zookeepers = Descriptor()  # список персоналу, що відповідають за вол'єри
+
+    def __init__(self, data_file='zoo_data.json'):
+        # Загружаем данные при инициализации
+        self.load_from_file(data_file)
+
+    def load_from_file(self, file_name):
+        try:
+            with open(file_name, 'r') as file:
+                data = json.load(file)
+
+                # Завантаження вол'єрів
+                for enclosure_data in data['enclosures']:
+                    id_enclosure = enclosure_data['enclosure_id'][enclosure_data['enclosure_id'].index('-') + 1:]
+                    self.__enclosures = Enclosure(id_enclosure, enclosure_data['title'], enclosure_data['size'])
+
+                # Завантаження тварин
+                for animal_data in data['animals']:
+                    new_animal = Animal(animal_data['name'], animal_data['species'], animal_data['age'])
+                    enclosure_id = animal_data['enclosure']
+                    new_enclosure = self.find_enclosure(enclosure_id)
+                    self.__animals = [new_animal, new_enclosure]
+
+                # додаємо тварин у список вол'єрів
+                for enclosure_data in data['enclosures']:
+                    enclosure = self.find_enclosure(enclosure_data['enclosure_id'])
+                    for animal in enclosure_data['animals']:
+                        enclosure.animals = self.find_animal(animal)
+
+
+                # Завантаження співробітників
+                for employee_data in data['employees']:
+                    new_employee = Employee(employee_data['job_title'], employee_data['name'])
+                    new_employee.employee_id = employee_data['employee_id']
+                    self.__employees = new_employee
+
+                # Завантажуємо наглядачів та зв'язуємо їх з вол'єрами
+                for zookeeper_data in data['zookeepers']:
+                    employee = self.find_employee(zookeeper_data['employee_id'])
+                    if zookeeper_data['enclosures']:
+                        # TODO: необхідно створити об'єкт наглядача
+                        zookeeper = Zookeeper(employee, None)
+                        for id_enclosure in zookeeper_data['enclosures']:
+                            new_enclosure = self.find_enclosure(id_enclosure)
+                            zookeeper.list_enclosures = new_enclosure
+                    self.__zookeepers = zookeeper
+            print("Данные успешно загружены.")
+
+        except FileNotFoundError:
+            print(f"Файл {file_name} не найден.")
+
+    def find_animal(self, animal):
+        for object_animal, enclosure in self.__animals:
+            if object_animal == animal:
+                return object_animal
+        return None
+
+    def find_employee(self, employee_id):
+        for employee in self.__employees:
+            if employee.employee_id == employee_id:
+                return employee
+        return None
+
+    def find_enclosure(self, id_enclosure):
+        for enclosure in self.__enclosures:
+            if enclosure.enclosure_id == id_enclosure:
+                return enclosure
+        return None
 
     def __str__(self):
         lists_data_zoo = ''
@@ -33,12 +101,20 @@ class MyZoo:
 
         lists_data_zoo += f'\n\n{' ' * 5}*** LIST EMPLOYEES ***\n\n'
         if self.__employees:
-            pass
+            for index, employee in enumerate(self.__employees):
+                lists_data_zoo += f'{index + 1}. {employee}\n'
         else:
             lists_data_zoo += 'List is empty\n\n'
+
         lists_data_zoo += f'\n\n{' ' * 5}*** LIST ZOOKEEPERS ***\n\n'
         if self.__zookeepers:
-            pass
+            for index, zookeeper in enumerate(self.__zookeepers):
+                lists_data_zoo += f'{index + 1}. {zookeeper.zookeeper}:\n'
+                if zookeeper.list_enclosures:
+                    for index, enclosure in enumerate(zookeeper.list_enclosures):
+                        lists_data_zoo += f'\t\t{index + 1}. {enclosure}\n'
+                else:
+                    lists_data_zoo += f'\t\tList of the enclosures is empty\n'
         else:
             lists_data_zoo += 'List is empty\n\n'
 
@@ -259,8 +335,6 @@ class MyZoo:
         self.place_enclosure_into_employee(choice_employee, choice_enclosure)
 
     def place_enclosure_into_employee(self, employee, enclosure):
-        # Перевірка, чи існує співробітник у списку __zookeepers
-        # if self.__zookeepers:
         found_employee = next((zookeeper for zookeeper in self.__zookeepers if zookeeper.zookeeper == employee), None)
         if found_employee:
             found_enclosure = next((item for item in found_employee.list_enclosures if item == enclosure), None)
