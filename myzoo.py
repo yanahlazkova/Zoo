@@ -12,7 +12,7 @@ class MyZoo:
     __employees = Descriptor()  # список співробітників
     __zookeepers = Descriptor()  # список персоналу, що відповідають за вол'єри
 
-    def __init__(self, data_file='zoo_data.json'):
+    def __init__(self, data_file='zoo_data1.json'):
         # Загружаем данные при инициализации
         self.load_from_file(data_file)
 
@@ -317,8 +317,7 @@ class MyZoo:
             Menu.display_list('LIST EMPLOYEES:', self.__employees)
             choice = Menu.get_user_choice(len(self.__employees))
             choice_employee = self.__employees[choice - 1]
-            # print(f'Your choice: {choice_employee}')
-            # input('Press any key ')
+
         else:
             print('!!! The list of employees is empty')
             input('Press any key ')
@@ -326,8 +325,7 @@ class MyZoo:
 
         if self.__enclosures:
             choice_enclosure = self.choose_item(self.__enclosures)
-            # print(f'Your choice: {choice_enclosure}')
-            # input('Press any key ')
+
         else:
             print("!!! The list of enclosures is empty")
             input('Press any key ')
@@ -347,9 +345,7 @@ class MyZoo:
                 print(f'Наглядачу {employee} додано вол\'єр {enclosure}')
             Menu.display_list('List of the enclosures', found_employee.list_enclosures)
             input('Press any key ')
-            # else:
-            #     new_zookeeper = Zookeeper(employee, enclosure)
-            #     self.__zookeepers = new_zookeeper
+
         else:
             new_zookeeper = Zookeeper(employee, enclosure)
             self.__zookeepers = new_zookeeper
@@ -386,12 +382,20 @@ class MyZoo:
             print('Список співробітників пустий.\n')
 
     def save_to_file(self):
-        filename = "zoo_data.json"
+        filename = "zoo_data1.json"
+        animals_list = []
+
+        for animal, enclosure in self.__animals:
+            animal_dict = animal.to_dict()
+            animal_dict['enclosure'] = enclosure.enclosure_id
+            animals_list.append(animal_dict)
+
+
         data = {
-            "animals": [animal.to_dict() for animal in self.__animals],
+            "animals": animals_list,
             "enclosures": [enclosure.to_dict() for enclosure in self.__enclosures],
-            "employees": self.__employees,
-            "zookeepers": self.__zookeepers
+            "employees": [employee.to_dict() for employee in self.__employees],
+            "zookeepers": [zookeeper.to_dict() for zookeeper in self.__zookeepers]
         }
         with open(filename, 'w') as file:
             json.dump(data, file, indent=4)
