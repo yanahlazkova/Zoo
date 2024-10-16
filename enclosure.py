@@ -29,7 +29,9 @@ class Enclosure:
     def to_dict(self):
         return {
             "enclosure_id": self.__enclosure_id,
-            "size": self.__size
+            "title": self.__title,
+            "size": self.__size,
+            "animals": [animal.to_dict() for animal in self.__animals]
         }
 
     def __str__(self):

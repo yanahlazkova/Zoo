@@ -9,13 +9,13 @@ class Employee(Person):
     def __init__(self, job_title, name):
         super().__init__(self.__pref_id, name)
         print(f'id: {self.employee_id}')
-        # self.__job_title = input('Enter the job title: ')
         self.__job_title = job_title
 
     def to_dict(self):
         return {
+            "name": self.name,
             "job_title": self.__job_title,
-            "name": self.__name,
+            "employee_id": self.employee_id
         }
 
     def __str__(self):
@@ -47,3 +47,9 @@ class Zookeeper:
     @list_enclosures.setter
     def list_enclosures(self, new_enclosure):
         self.__list_enclosures.append(new_enclosure)
+
+    def to_dict(self):
+        return {
+            "employee_id": self.__zookeeper.employee_id,
+            "enclosures": [enclosure.enclosure_id for enclosure in self.__list_enclosures]
+        }
